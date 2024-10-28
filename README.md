@@ -6,5 +6,4 @@
 6.productMuhammad,
 7.ofertaTrabajoMuhammad,
 8.actividadesParaExamen,
-9.sortingArrayMuhammad,
-10.LoginMuhammad
+9.LoginMuhammad
