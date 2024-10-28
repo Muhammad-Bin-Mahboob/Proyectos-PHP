@@ -1,0 +1,9 @@
+.foto {
+    max-height: 150px;
+    max-width: 150px;
+    border-radius: 10%;
+}
+
+.color{
+    color: rgb(251, 189, 109);
+}
