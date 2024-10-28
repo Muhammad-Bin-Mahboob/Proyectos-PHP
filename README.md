@@ -1,4 +1,4 @@
-1.pruba,
+1.prueba,
 2.portafolio2muhammad,
 3.funcionesMuhammad,
 4.cardsMuhammad,
