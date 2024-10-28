@@ -7,29 +7,36 @@
  */
 
 require_once($_SERVER['DOCUMENT_ROOT'].'\includes\usersList.inc.php');
-
 require_once($_SERVER['DOCUMENT_ROOT'].'\includes\User.inc.php');
-
+ 
 $errors = [];
 $userData = null;
-
-if (!empty($_POST)) {
-    $username = trim($_POST['user']);
-    $password = trim($_POST['password']);
-
-    // Verificamos si ambos campos están completos.
+ 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['user'])) {
+        $username = trim($_POST['user']);
+    } else {
+        $username = '';
+    }
+    
+    if (isset($_POST['password'])) {
+        $password = trim($_POST['password']);
+    } else {
+        $password = '';
+    }    
+ 
+    // Validar que ambos campos estén completos.
     if (empty($username)) {
         $errors['user'] = 'Por favor, completa el campo de Usuario.';
     } elseif (empty($password)) {
         $errors['password'] = 'Por favor, completa el campo de Contraseña.';
     } else {
-        // Usamos la función userExists para verificar si el usuario existe.
+        // Verificar si el usuario existe.
         $userData = userExists($username, $users);
-
+ 
         if ($userData !== null) {
-            // Si el usuario existe, intentamos el login.
+            // Intentar el login.
             if ($userData->login($password)) {
-                // Login exitoso.
                 echo "<p>Login correcto</p>";
                 echo "<p>" . $userData->__toString() . "</p>";
                 echo '<a href="index.php">Volver</a>';
@@ -42,11 +49,6 @@ if (!empty($_POST)) {
         }
     }
 }
-
-foreach ($errors as $error){
-    print_r($error);
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,6 +58,15 @@ foreach ($errors as $error){
     <title>Accede a la web</title>
 </head>
 <body>
+    <?php 
+        $fields = ['user', 'password'];
+        foreach ($fields as $field) {
+            if (isset($errors[$field])) {
+                echo $errors[$field];
+            }
+        }
+    ?>
+    <br>
     <form action="#" method="post">
         Usuario: <input type="text" name="user" value="<?=$_POST['user']??''?>">
         <br>

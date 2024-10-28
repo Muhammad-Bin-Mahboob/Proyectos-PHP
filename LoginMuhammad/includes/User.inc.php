@@ -6,7 +6,7 @@
  * @version 2.0
  */
 
-class User{
+class User {
     private string $username;
     private string $password;
     private string $mail;
@@ -18,43 +18,47 @@ class User{
         $this->mail = $email;
     }
 
-    public function __set($variable, $value){
-        if(isset($this->$variable)){
-            if($variable !== 'logged'){
-                $this->$variable = $value;
-            }
+    public function __set($variable, $value) {
+        if (isset($this, $variable) && $variable !== 'logged') {
+            $this->$variable = $value;
         }
     }
 
-    public function __get($variable){
-        if(isset($this->$variable)){
+    public function __get($variable) {
+        if (isset($this, $variable)) {
             return $this->$variable;
+        } else {
+            return null;
         }
+        
     }
 
-    
-    public function login($pass) {
-        if ($this->logged == true) {
+    public function login(string $pass): bool {
+        // si el usuario ya estaba loggeado o password es 
+        // incorecto develvo false
+        if ($this->logged || $pass !== $this->password) {
             return false;
         }
-
-        if ($this->logged == false) {
-            if ($pass == $this->password) {
-                $this->logged = true;
-                return true;
-            }
-        }
-    }
+        // si el usuario no estaba loggeado cambio
+        // logged a true y develvo true
+        $this->logged = true;
+        return true;
+    }    
     
     public function logout() {
-        if ($this->logged = true) {
+        // si el usuario es loggeado cambio
+        // logged a false y devuelvo true
+        if ($this->logged) {
             $this->logged = false;
             return true;
         }
+        // sino Retorna false, indicando que 
+        // no se realizó ninguna acción porque el usuario
+        // ya estaba false.
         return false;
     }
 
-    public function __toString(){
+    public function __toString(): string {
         return "User: $this->username, Email: $this->mail";
     }
 }

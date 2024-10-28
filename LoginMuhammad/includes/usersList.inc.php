@@ -23,11 +23,11 @@ $users = [
 
 function userExists(string $nombre, array $usuarios): mixed {
     foreach ($usuarios as $usuario) {
+        // Si el username coincide con el nombre, devuelve el usuario.
         if ($usuario->username === $nombre) {
             return $usuario;
-        }else{
-            return null;
         }
     }
+    // Si no se encuentra el usuario, devuelve null.
+    return null;
 }
-
