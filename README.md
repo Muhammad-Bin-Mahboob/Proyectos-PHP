@@ -5,5 +5,5 @@
 5.almacenMuhammad,  
 6.productMuhammad,  
 7.ofertaTrabajoMuhammad,  
-8.actividadesParaExamen,  
+8.Exercises_For_Pratice,  
 9.LoginMuhammad  
