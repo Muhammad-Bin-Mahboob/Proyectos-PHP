@@ -4,7 +4,6 @@
  * @version 1.0
  */
 
-// Incluir las clases necesarias
 require_once($_SERVER['DOCUMENT_ROOT'].'/HeroMuhammad/Hero.inc.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/HeroMuhammad/Weapon.inc.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/HeroMuhammad/Armor.inc.php');
@@ -19,57 +18,164 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/HeroMuhammad/Potion.inc.php');
     <title>Index</title>
 </head>
 <body>
-<?php
-    // Crear un nuevo héroe
-    $hero = new Hero("Muhammad", "Imperial", "Mago");
+<?php 
+// Crear instancia de Hero
+$hero = new Hero("Muhammad", "Nórdico", "Guerrero");
 
-    // Crear armas
-    $sword = new Weapon("Espada Larga", 15);
-    $axe = new Weapon("Hacha de Batalla", 20);
+// Mostrar información inicial del héroe
+echo $hero . "<br>";
 
-    // Añadir armas al héroe
-    $hero->weapons[] = $sword;
-    $hero->weapons[] = $axe;
+echo "<br>";
 
-    // Crear armaduras
-    $lightArmor = new Armor("Armadura Ligera", 15);
-    $heavyArmor = new Armor("Armadura Pesada", 10);
+// Añadir armas
+$weapon1 = new Weapon("Espada larga", 15);
+$weapon2 = new Weapon("Daga", 5);
+$weapon3 = new Weapon("Arco", 7);
 
-    // Añadir armaduras al héroe
-    $hero->armors[] = $lightArmor;
-    $hero->armors[] = $heavyArmor;
+$hero->__set('weapons', $weapon1);
+echo $weapon1->toString() . "<br>";
 
-    // Crear pociones
-    $healingPotion1 = new Potion(20);
-    $healingPotion2 = new Potion(30);
+$hero->__set('weapons', $weapon2);
+echo $weapon2->toString() . "<br>";
 
-    // Añadir pociones al héroe
-    $hero->potions[] = $healingPotion1;
-    $hero->potions[] = $healingPotion2;
+// Intentar añadir una tercera arma y ver el mensaje de error
+$hero->__set('weapons', $weapon3);
 
-    echo '<p>';
-    // Mostrar información del héroe
-    echo $hero->__toString() . "<br>";
+echo "<br>";
 
-    // Realizar un ataque y mostrar el daño total
-    $damage = $hero->attack();
-    echo 'Daño total de ataque del Hero: ' . $damage . '<br>';
+// Añadir armadura
+$armor = new Armor("Cota de malla", 20);
+$hero->__set('armors', $armor);
+echo $armor->toString() . "<br>";
 
-    // Calcular el daño recibido y mostrar la defensa
-    $damageReceived = 25;
-    $damageTaken = $hero->defense($damageReceived);
-    echo 'Daño recibido por el Hero: ' . $damageReceived . ', Daño absorbido por el Hero: ' . $damageTaken . '<br>';
+// Intentar añadir una segunda armadura y ver el mensaje de error
+$secondArmor = new Armor("Escudo", 10);
+$hero->__set('armors', $secondArmor);
 
-    echo 'Situacion del Hero <br>';
-    echo $hero->__toString() . "<br>";
+echo "<br>";
 
-    // Usar la poción de mayor salud y mostrar la nueva salud
-    $hero->usePotion();
-    echo 'Salud después de usar la poción: ' . $hero->__get('health') . '<br>';
+// Añadir pociones
+$potion1 = new Potion(20);
+$potion2 = new Potion(5);
+$potion3 = new Potion(10);
+$potion4 = new Potion(30);
 
-    // Mostrar información del héroe después de usar la poción
-    echo $hero->__toString();
-    echo '</p>';
+$hero->__set('potions', $potion1);
+echo $potion1->toString() . "<br>";
+
+$hero->__set('potions', $potion2);
+echo $potion2->toString() . "<br>";
+
+$hero->__set('potions', $potion3);
+echo $potion3->toString() . "<br>";
+
+// Intentar añadir una cuarta poción y ver el mensaje de error
+$hero->__set('potions', $potion4);
+
+echo "<br>";
+
+// Probar el método de ataque y defensa
+echo "Ataque total del héroe: " . $hero->attack() . "<br>";
+
+echo "<br>";
+
+$damagehecho=25;
+$damageTaken = $hero->defense($damagehecho);
+echo "Daño echo al héroe: " . $damagehecho . "<br>";
+echo "Daño recibido por el héroe después de la defensa: " . $damageTaken . "<br>";
+
+// Usar una poción y mostrar la salud del héroe
+$hero->usePotion();
+echo "Salud del héroe después de usar poción: " . $hero->__get('health') . "<br>";
+
+echo "<br>";
+
+// Mostrar información final del héroe
+echo $hero . "<br>";
+
+
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+
+
+// Crear instancia de Hero2
+$hero2 = new Hero("Alex", "Profesor", "2Daw");
+
+// Mostrar información inicial del héroe
+echo $hero2 . "<br>";
+
+echo "<br>";
+
+// Añadir armas
+$weapon1 = new Weapon("Espada larga", 15);
+$weapon2 = new Weapon("Daga", 5);
+$weapon3 = new Weapon("Arco", 7);
+
+$hero2->__set('weapons', $weapon1);
+echo $weapon1->toString() . "<br>";
+
+$hero2->__set('weapons', $weapon2);
+echo $weapon2->toString() . "<br>";
+
+// Intentar añadir una tercera arma y ver el mensaje de error
+$hero2->__set('weapons', $weapon3);
+
+echo "<br>";
+
+// Añadir armadura
+$armor = new Armor("Cota de malla", 20);
+$hero2->__set('armors', $armor);
+echo $armor->toString() . "<br>";
+
+// Intentar añadir una segunda armadura y ver el mensaje de error
+$secondArmor = new Armor("Escudo", 10);
+$hero2->__set('armors', $secondArmor);
+
+echo "<br>";
+
+// Añadir pociones
+$potion1 = new Potion(20);
+$potion2 = new Potion(5);
+$potion3 = new Potion(10);
+$potion4 = new Potion(30);
+
+$hero2->__set('potions', $potion1);
+echo $potion1->toString() . "<br>";
+
+$hero2->__set('potions', $potion2);
+echo $potion2->toString() . "<br>";
+
+$hero2->__set('potions', $potion3);
+echo $potion3->toString() . "<br>";
+
+// Intentar añadir una cuarta poción y ver el mensaje de error
+$hero2->__set('potions', $potion4);
+
+echo "<br>";
+
+// Probar el método de ataque y defensa
+echo "Ataque total del héroe: " . $hero2->attack() . "<br>";
+
+echo "<br>";
+
+$damagehecho=25;
+$damageTaken = $hero2->defense($damagehecho);
+echo "Daño echo al héroe: " . $damagehecho . "<br>";
+echo "Daño recibido por el héroe después de la defensa: " . $damageTaken . "<br>";
+
+// Usar una poción y mostrar la salud del héroe
+$hero2->usePotion();
+echo "Salud del héroe después de usar poción: " . $hero2->__get('health') . "<br>";
+
+echo "<br>";
+
+// Mostrar información final del héroe
+echo $hero2 . "<br>";
 ?>    
 </body>
 </html>

@@ -20,7 +20,7 @@ class Potion {
     }
 
     public function toString() {
-        return 'Salud: ' . $this->health;
+        return 'Potion con Salud de: ' . $this->health;
     }
 }
 

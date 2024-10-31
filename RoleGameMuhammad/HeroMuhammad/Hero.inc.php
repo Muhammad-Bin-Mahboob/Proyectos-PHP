@@ -32,15 +32,36 @@ class Hero {
                 if ($this->checkSpecies($value)) {
                     $this->species = $value;
                 } else {
-                    $this->species = "humano";
+                    $this->species = "Humano";
                 }
                 break;
             case 'class':
                 if ($this->checkClass($value)) {
                     $this->class = $value;
                 } else {
-                    $this->class = "ninguna";
+                    $this->class = "Ninguna";
                 }                
+                break;
+            case 'weapons':
+                if (count($this->weapons) < 2) {
+                    $this->weapons[] = $value;
+                } else {
+                    echo "No puedes añadir más de 2 armas.<br>";
+                }
+                break;
+            case 'armors':
+                if (count($this->armors) < 1) {
+                    $this->armors[] = $value;
+                } else {
+                    echo "No puedes añadir más de 1 armadura.<br>";
+                }
+                break;
+            case 'potions':
+                if (count($this->potions) < 3) {
+                    $this->potions[] = $value;
+                } else {
+                    echo "No puedes añadir más de 3 pociones.<br>";
+                }
                 break;
             default:
                 if (isset($this->$variable)) {
