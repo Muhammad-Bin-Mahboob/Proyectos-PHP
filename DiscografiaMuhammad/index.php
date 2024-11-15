@@ -6,17 +6,46 @@
 * @version 1.0
 */
 
-$dsn = 'mysql:host=localhost;port=3307;dbname=discografia';
+$dsn = 'mysql:host=localhost;port=3306;dbname=discografia';
 $user = 'vetustamorla';
 $pass = '15151';
 $options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
-
+$message=[];
+// Array para almacenar mensajes de error o de éxito
 try{	
 	$connection = new PDO($dsn, $user, $pass, $options);
-} catch(Exception $ex) {
-	echo 'Fallo al crear la conexión:' . $ex->getMessage();
-}
 
+	if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
+		$query = $connection->prepare('SELECT id, name, photo FROM groups WHERE name LIKE :search ORDER BY name ASC;');
+		// Agregar comodines (%) al término de búsqueda para usar en la consulta
+		$searchParam = '%' . $_POST['search'] .'%';
+		$query->bindParam(':search', $searchParam);
+		$query->execute();
+
+		$groups = $query->fetchAll(PDO::FETCH_OBJ);
+
+		if (empty($groups)) {
+            $message['search'] = 'No se encontraron grupos que coincidan con la búsqueda.';
+        } else {
+            $message['search'] = 'Se encontraron ' . count($groups) . ' grupos.';
+        }
+	} else {
+		// Si no se realizó una búsqueda, mostrar todos los grupos
+		$query = $connection->prepare('SELECT id, name, photo FROM groups ORDER BY name ASC;');
+		$query->execute();
+		$groups = $query->fetchAll(PDO::FETCH_OBJ);
+
+		$message['search'] = 'Mostrando todos los grupos.';
+	}
+	// Liberar los recursos
+	unset($query);
+	// Cerrar la conexión
+	unset($connection);
+
+} catch(Exception $ex) {
+	$message['connection'] = 'Fallo al crear la conexión.';
+}
+//var_dump($groups);
 ?>
 <!doctype html>
 <html lang="es">
@@ -40,31 +69,25 @@ try{
 	</form>
 	
 	<h2>Grupos:</h2>
-	
+	<?php
+    if (!empty($message)) {
+        if (isset($message['connection'])) {
+            echo '<p>' . $message['connection'] . '</p>';
+        } else if (isset($message['search'])) {
+            echo '<p>' . $message['search'] . '</p>';
+        }
+    }
+
+    if (!empty($groups)) {
+        foreach ($groups as $group) {
+            echo '<div class="group">';
+            echo '<h3>' . $group->name . '</h3>';
+            echo '<img src="/imagenes/grupos/' . $group->photo . '" alt="' . $group->name . '" width="150">';
+            echo '</div>';
+        }
+    }
+    ?>
     <footer>
 		<h3>Muhammad Bin Mahboob © 2024</h3>
     </footer>
 </html>
-
-<!-- 
-index.php:
-En la parte superior tendrá un formulario con un campo de búsqueda. Este formulario debe enviar los datos al propio script index.php.
-- Si el script no recibe datos del formulario deberá mostrar todos los grupos en orden alfabético ascendente.
-SELECT id, name, photo FROM groups ORDERBY name ASC;
-- Si el script recibe datos del formulario deberá mostrar de los grupos que contengan la palabra introducida en el campo de búsqueda: la cantidad de grupos y los grupos en orden alfabético ascendente. Si la búsqueda no devuelve resultados se mostrará un mensaje indicándolo. 
-SELECT id, name, photo FROM groups WHERE name LIKE '%busqueda%' ORDERBY name ASC;
-Cuando se muestren los grupos, de cada grupo se mostrará el nombre y su foto (obteniendo estos datos de la tabla groups).
-
-// Asignación del término de búsqueda con if y uso de POST
-if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
-    $searchTerm = trim($_POST['search']);
-    $query = "SELECT id, name, photo FROM groups WHERE name LIKE :search ORDER BY name ASC";
-    $stmt = $connection->prepare($query);
-    $stmt->execute([':search' => "%$searchTerm%"]);
-} else {
-    $searchTerm = '';
-    $query = "SELECT id, name, photo FROM groups ORDER BY name ASC";
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-}
--->
