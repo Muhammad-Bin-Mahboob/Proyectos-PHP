@@ -3,15 +3,11 @@
 * Discografía
 *
 * @author Muhammad
-* @version 1.0
+* @version 2.0
 */
-
-$dsn = 'mysql:host=localhost;port=3306;dbname=discografia';
-$user = 'vetustamorla';
-$pass = '15151';
-$options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
+require_once($_SERVER['DOCUMENT_ROOT'].'/includes/connection.inc.php');
 $message=[];
-// Array para almacenar mensajes de error o de éxito
+// Array para almacenar mensajes de error
 try{	
 	$connection = new PDO($dsn, $user, $pass, $options);
 
@@ -52,7 +48,7 @@ try{
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/styles/style.css">
+	<link rel="stylesheet" href="/css/style.css">
 	<title>Discografía</title>
 </head>
 
@@ -81,9 +77,11 @@ try{
     if (!empty($groups)) {
         foreach ($groups as $group) {
             echo '<div class="group">';
-            echo '<h3>' . $group->name . '</h3>';
-            echo '<img src="/imagenes/grupos/' . $group->photo . '" alt="' . $group->name . '" width="150">';
-            echo '</div>';
+            echo '<h3><a href="group.php?id=' . $group->id . '">' . $group->name . '</a></h3>';
+            echo '<a href="group.php?id=' . $group->id . '">
+					<img src="/imagenes/grupos/' . $group->photo . '" alt="' . $group->name . '" class="size">
+				  </a>';
+			echo '</div>';
         }
     }
     ?>
