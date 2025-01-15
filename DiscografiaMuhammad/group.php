@@ -46,6 +46,7 @@ try {
         $messages['success'] = 'Álbum eliminado correctamente.';
         
         header("Location: group.php?id=" . $_GET['id']);
+        exit;
     }
 
     if (!empty($_POST)) {
@@ -77,6 +78,7 @@ try {
             $insertAlbum->bindParam(':photo', $_POST['photo']);
             $insertAlbum->execute();
             header("Location: group.php?id=" . $_POST['group_id']);
+            exit;
         } else {
             $messages['emptyPost']= 'Tienes que rellenar todos los campos.';
         }
@@ -96,10 +98,7 @@ try {
     <title>Discografía</title>
 </head>
 <body>
-    <header>
-        <a href="index.php"><b>Discografía</b></a>
-        <a href="songs.php"><b>Canciones</b></a>
-    </header>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header.inc.php'); ?>
     <h2>Álbumes del Grupo</h2>
 
     <?php
@@ -154,9 +153,7 @@ try {
         <input type="submit" value="Añadir álbum">
     </form>
 
-    <footer>
-        <h3>Muhammad Bin Mahboob © 2024</h3>
-    </footer>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.inc.php'); ?>
 </body>
 </html>
 

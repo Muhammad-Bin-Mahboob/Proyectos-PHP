@@ -6,8 +6,7 @@
 * @version 2.0
 */
 require_once($_SERVER['DOCUMENT_ROOT'].'/includes/connection.inc.php');
-$message=[];
-// Array para almacenar mensajes de error
+
 try{	
 	$connection = new PDO($dsn, $user, $pass, $options);
 
@@ -53,10 +52,7 @@ try{
 </head>
 
 <body>
-	<header>
-		<a href="index.php"><b>Discografía</b></a>
-		<a href="songs.php"><b>Canciones</b></a>
-    </header>
+	<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header.inc.php'); ?>
 
 	<form action="#" method="post">
 		<label for="search">Búsqueda</label>
@@ -66,6 +62,7 @@ try{
 	
 	<h2>Grupos:</h2>
 	<?php
+	// Muestro los errores si existen
     if (!empty($message)) {
         if (isset($message['connection'])) {
             echo '<p>' . $message['connection'] . '</p>';
@@ -74,18 +71,16 @@ try{
         }
     }
 
+	// Muestrar los grupos
     if (!empty($groups)) {
         foreach ($groups as $group) {
-            echo '<div class="group">';
-            echo '<h3><a href="group.php?id=' . $group->id . '">' . $group->name . '</a></h3>';
-            echo '<a href="group.php?id=' . $group->id . '">
-					<img src="/imagenes/grupos/' . $group->photo . '" alt="' . $group->name . '" class="size">
-				  </a>';
+            echo '<div>';
+            echo 	'<h3><a href="group.php?id=' . $group->id . '">' . $group->name . '</a></h3>';
+            echo 	'<a href="group.php?id=' . $group->id . '">
+						<img src="/imagenes/grupos/' . $group->photo . '" alt="' . $group->name . '" class="size">
+				  	</a>';
 			echo '</div>';
         }
     }
-    ?>
-    <footer>
-		<h3>Muhammad Bin Mahboob © 2024</h3>
-    </footer>
+    include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.inc.php'); ?>
 </html>

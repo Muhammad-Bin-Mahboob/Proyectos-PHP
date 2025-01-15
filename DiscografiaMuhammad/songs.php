@@ -3,14 +3,9 @@
 * Discografía
 *
 * @author Muhammad
-* @version 1.0
+* @version 2.0
 */
-$dsn = 'mysql:host=localhost;port=3306;dbname=discografia';
-$user = 'vetustamorla';
-$pass = '15151';
-$options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
-$message = [];
-$songs = [];
+require_once($_SERVER['DOCUMENT_ROOT'].'/includes/connection.inc.php');
 
 try {
     $connection = new PDO($dsn, $user, $pass, $options);
@@ -86,10 +81,7 @@ function formatDuration($seconds) {
 </head>
 
 <body>
-	<header>
-		<a href="index.php"><b>Discografía</b></a>
-		<a href="songs.php"><b>Canciones</b></a>
-    </header>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header.inc.php'); ?>
 	
 	<h2>Canciones:</h2>
 
@@ -125,7 +117,5 @@ function formatDuration($seconds) {
             <?php } ?>
         </tbody>
     </table>
-    <footer>
-		<h3>Muhammad Bin Mahboob © 2024</h3>
-    </footer>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer.inc.php'); ?>
 </html>
