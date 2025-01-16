@@ -77,14 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
 
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" placeholder="Contraseña">
+        <input type="text" id="password" name="password" placeholder="Contraseña">
         <br>
 
         <button type="submit">Accede</button>
     </form>
 </body>
 </html>
-
 
 
 
