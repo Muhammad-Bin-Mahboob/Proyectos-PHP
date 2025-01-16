@@ -4,7 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/includes/connection.inc.php');
 
 $messages = []; // Inicializar mensajes
 
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['user'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = trim($_POST['usuario'] ?? '');
         $password = trim($_POST['password'] ?? '');
@@ -38,6 +38,8 @@ if (!isset($_SESSION['usuario'])) {
             }
         }
     }
+} elseif(isset($_SESSION['user'])) {
+    // ayuda
 }
 ?>
 <!DOCTYPE html>
@@ -51,12 +53,12 @@ if (!isset($_SESSION['usuario'])) {
     <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.inc.php'); ?>
     <main>
         <?php
-        if (!isset($_SESSION['usuario'])) {
+        if (!isset($_SESSION['user'])) {
             echo '<h2>Bienvenido a Mi Red Social</h2>';
             echo '<p>Por favor, Regístrate</p>';
 
             foreach ($messages as $message) {
-                echo "<p>$message</p>";
+                echo '<p>' . $message . '</p>';
             }
         ?>
         <form action="#" method="POST">
@@ -69,12 +71,16 @@ if (!isset($_SESSION['usuario'])) {
             <button type="submit">Registrar</button>
         </form>
         <?php
-        } else {
-            echo '<h2>Bienvenido, ' . $_SESSION['usuario'] . '</h2>';
+        } elseif(isset($_SESSION['user'])) {
+            echo '<h2>Bienvenido, ' . $_SESSION['user'] . '</h2>';
             echo '<p>Aquí verás publicaciones de usuarios a los que sigues.</p>';
-        } ?>
+
+            //ayuda
+        }
+        ?>
     </main>
     <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/includes/footer.inc.php'); ?>
 </body>
 </html>
+
 
