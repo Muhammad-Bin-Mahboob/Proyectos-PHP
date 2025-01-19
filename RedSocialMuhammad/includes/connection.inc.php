@@ -1,5 +1,5 @@
 <?php
-$dsn = 'mysql:host=localhost;port=3306;dbname=social';
+$dsn = 'mysql:host=localhost;port=3307;dbname=social';
 $user = 'social';
 $pass = 'laicos';
 $charset = 'utf8mb4';

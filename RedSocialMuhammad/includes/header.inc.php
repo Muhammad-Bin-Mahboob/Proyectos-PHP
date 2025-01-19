@@ -9,9 +9,9 @@
                       <input type="text" name="busqueda" placeholder="Buscar usuarios">
                       <button type="submit">Buscar</button>
                   </form>';
-            echo '<nav>
-                      <a href="/front-end/user.php">' . $_SESSION['user'] . '</a>
-                      <a href="/front-end/new.php">Nueva publicación</a>
+            echo '<nav>';
+                      echo '<a href="/front-end/user.php?id=' . $_SESSION['user_id'] . '">' . $_SESSION['user'] . '</a><br>';
+                      echo '<a href="/front-end/new.php">Nueva publicación</a><br>
                       <a href="/front-end/close.php">Cerrar sesión</a>
                   </nav>';
         } else {

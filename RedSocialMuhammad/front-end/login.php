@@ -5,6 +5,15 @@
  */
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/session.inc.php');
+
+// session para quien puede entrara en index
+// $_SESSION['allow_index_access'] = true;
+
+if(isset($_SESSION['user_id'])){
+    header('Location: /front-end/index.php');
+    exit;
+}
+
 $messages = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -35,8 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $userData = $query->fetch(PDO::FETCH_ASSOC);
                 if (password_verify($_POST['password'], $userData['password'])) {
                     session_regenerate_id();
+
+                    // si todo esta bien creo sessiones
                     $_SESSION['user'] = $userData['user'];
                     $_SESSION['user_id'] = $userData['id'];
+
+                    unset($query);
+                    unset($connection);
 
                     header('Location: /front-end/index.php');
                     exit;
@@ -44,6 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $messages['incorrect'] = 'Contraseña incorrecta.';
                 }
             }
+            
+            unset($query);
+            unset($connection);
         } catch (Exception $e) {
             $messages['connection'] = 'Error en el acceso: ' . $e->getMessage();
         }
@@ -72,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ?>
 
     <form action="#" method="POST">
+        <!-- se puede logear tanto con correo que con nombre -->
         <label for="usuario">Usuario o correo electrónico:</label>
         <input type="text" id="usuario" name="usuario" placeholder="Usuario o email" value="<?= $_POST['usuario'] ?? ''; ?>">
         <br>
@@ -82,8 +100,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Accede</button>
     </form>
+    <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/includes/footer.inc.php'); ?>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

@@ -2,6 +2,24 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/includes/session.inc.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/includes/connection.inc.php');
 
+// session para quien puede entrara en index
+// $_SESSION['allow_index_access'] = true;
+
+// session para quien puede entrara en close y account
+// $_SESSION['allow_closeAndAccount_access'] = true;
+
+// if (isset($_SESSION['allow_new_access']) && $_SESSION['allow_new_access'] === true) {
+//     unset($_SESSION['allow_new_access']);
+// } else {
+//     header("Location: /front-end/login.php");
+//     exit;
+// }
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /front-end/login.php");
+    exit;
+}
+
 // Inicializa $messages como un arreglo vacío
 $messages = [];
 
@@ -15,12 +33,15 @@ if ($_POST) {
 
         if (!empty($contenido)) {
             $connection = new PDO($dsn, $user, $pass, $options);
+
+            // insertar la publicacion en entries
+            
             $query = $connection->prepare("INSERT INTO entries (user_id, text, date) VALUES (?, ?, NOW())");
             $query->execute([$_SESSION['user_id'], $contenido]);
 
             unset($query);
             unset($connection);
-            header("Location: index.php");
+            header("Location: /front-end/index.php");
             exit;
         }
     } catch (PDOException $ex) {
@@ -36,8 +57,12 @@ if ($_POST) {
     <title>Nueva Publicación</title>
 </head>
 <body>
-    <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.inc.php'); ?>
+    <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.inc.php'); 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/includes/listaDeUsuarios.inc.php'); 
+    ?>
     <main>
+        <a href="/back-office/account.php?id=">Account</a>
         <h2>Nueva Publicación</h2>
         <?php 
         if (!empty($messages)) {
@@ -55,4 +80,3 @@ if ($_POST) {
     <?php require_once($_SERVER['DOCUMENT_ROOT'] .'/includes/footer.inc.php'); ?>
 </body>
 </html>
-
