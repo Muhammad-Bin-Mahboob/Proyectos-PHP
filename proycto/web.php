@@ -6,6 +6,3 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('contacto', function () {
-    return view('Contact');
-})->name('contacto');

@@ -1,17 +1,12 @@
 @extends('layout');
 
-@section('title','Contact')
+@section('title','Politica')
 @section('content')
-    <form action="{{ messages.store }}" method="post">
-        @csrf
-        <input value="alex" id='name' hidden></input>
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias error fugit recusandae earum eius deleniti et commodi iusto, neque sit culpa quo. Quisquam qui quasi mollitia iure, fuga vitae quia.
+    </div>
 
-        <label for="subject">Subject</label>
-        <input type="text" name="subject" id="subject">
-
-        <label for="message">Message</label>
-        <input type="text" name="message" id="message">
-
-        <input type="submit" value="Enviar">
-    </form>
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias error fugit recusandae earum eius deleniti et commodi iusto, neque sit culpa quo. Quisquam qui quasi mollitia iure, fuga vitae quia.
+    </div>
 @endsection

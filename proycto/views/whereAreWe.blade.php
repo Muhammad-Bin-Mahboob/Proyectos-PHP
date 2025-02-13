@@ -1,3 +1,8 @@
-<div>
-    <!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
-</div>
+@extends('layout');
+
+@section('title','Donde Estamos')
+@section('content')
+    <div>
+        Aqui es donde estamos.
+    </div>
+@endsection

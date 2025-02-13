@@ -2,9 +2,9 @@
 
 @section('title','Contact')
 @section('content')
-    <form action="{{ messages.store }}" method="post">
+    <form action="{{ route('messages.store') }}" method="post">
         @csrf
-        <input value="alex" id='name' hidden></input>
+        <input value="muhammad" id='name' name='name' hidden></input>
 
         <label for="subject">Subject</label>
         <input type="text" name="subject" id="subject">
