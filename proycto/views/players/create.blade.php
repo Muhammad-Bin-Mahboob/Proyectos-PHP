@@ -1,3 +1,3 @@
 <div>
-    <!-- No surplus words or unnecessary actions. - Marcus Aurelius -->
+    <!-- Do what you can, with what you have, where you are. - Theodore Roosevelt -->
 </div>

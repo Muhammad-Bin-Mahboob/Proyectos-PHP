@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MessageController extends Controller
 {
@@ -20,7 +21,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        return view('messages.create');
     }
 
     /**
@@ -28,13 +29,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = new Message();
-        $message->name = $request->input('name');
-        $message->name = $request->input('subject');
-        $message->name = $request->input('message');
-        $book->save();
-
-        return redirect()->route('messages.show', $message);
+        return redirect()->route('messages.create');
     }
 
     /**

@@ -1,3 +1,3 @@
 <div>
-    <!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
+    <!-- It is not the man who has too little, but the man who craves more, that is poor. - Seneca -->
 </div>

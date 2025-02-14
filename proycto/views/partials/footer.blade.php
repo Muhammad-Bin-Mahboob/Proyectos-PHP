@@ -1,8 +1,8 @@
-<div>Falcons</div>
+<h1>Falcons</h1>
 <div>Desarrollado por Muhammad Bin Mahboob</div>
 <div>
-    <a href="{{ route('index') }}">Politica de Privacidad<a>
-    <a href="{{ route('index') }}">Terminos<a>
-    <a href="{{ route('index') }}">Condiciones de Uso<a>
-    <a href="{{ route('contacto') }}">Contacto<a>
+    <a href="{{ route('Politics') }}">Politica de Privacidad<a>
+    <a href="{{ route('Terms') }}">Terminos<a>
+    <a href="{{ route('UseConditions') }}">Condiciones de Uso<a>
+    <a href="{{ route('Contact') }}">Contacto<a>
 </div>

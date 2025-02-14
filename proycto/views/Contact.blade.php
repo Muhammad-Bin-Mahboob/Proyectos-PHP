@@ -3,6 +3,8 @@
 @section('title','Contact')
 @section('content')
     <form action="{{ route('messages.store') }}" method="post">
+        {{-- <a href="{{route('message.store')}}">Oto</a>
+        <form> --}}
         @csrf
         <input value="muhammad" id='name' name='name' hidden></input>
 
