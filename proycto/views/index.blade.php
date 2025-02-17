@@ -1,9 +1,6 @@
 @extends('layout')
-
 @section('title','Home')
 @section('content')
-    <a href="">logo</a>
-
     <p>
         El Equipo Falcón es sinónimo de velocidad, precisión y garra en el fútbol.
         Inspirado en la agilidad y determinación del halcón, este equipo se caracteriza

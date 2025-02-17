@@ -4,10 +4,7 @@
     <form action="{{ route('signup') }}" method="post">
         @csrf
 
-        <label for="username">Nombre de usuario:</label>
-        <input type="text" name="username" id="username" value="{{ old('username') }}"><br>
-
-        <label for="name">Nombre completo:</label>
+        <label for="name">Nombre:</label>
         <input type="text" name="name" id="name" value="{{ old('name') }}"><br>
 
         <label for="email">Email:</label>
